@@ -154,13 +154,13 @@ public class FP04CustomClass {
 				     .collect(Collectors.toList()));
 		//[FullStack:14000:91, AWS:21000:92, Azure:21000:99, Docker:20000:92, Kubernetes:20000:91]
 
-		System.out.println(
+		System.out.println("Max: " +
 				courses.stream()
 				.max(comparingByNoOfStudentsAndNoOfReviews));
 		//Optional[FullStack:14000:91]
 
-		System.out.println(
-				courses.stream()
+		System.out.println("Min: " +
+						courses.stream()
 				.min(comparingByNoOfStudentsAndNoOfReviews)
 				.orElse(new Course("Kubernetes", "Cloud", 91, 20000))
 				);
@@ -251,6 +251,73 @@ public class FP04CustomClass {
 
 		Predicate<Course> reviewScoreGreaterThan90Predicate2 
 						= createPredicateWithCutoffReviewScore(90);
+
+		System.out.println("--------------------------------------------------------------");
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory))
+
+		);
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.mapping(Course::getName, Collectors.toList())))
+
+		);
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.counting()))
+
+		);
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.summingInt(Course::getNoOfStudents)))
+
+		);
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.averagingInt(Course::getReviewScore)))
+
+		);
+
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.maxBy(Comparator.comparing(Course::getReviewScore))))
+
+		);
+
+		System.out.println(
+
+				courses.stream().collect(Collectors.groupingBy(Course::getCategory,Collectors.mapping( c -> c.getName().toUpperCase(), Collectors.toList())))
+
+		);
+
+		System.out.println(
+
+				courses.stream()
+						.filter(c -> c.getReviewScore() >= 95)
+						.collect(Collectors.groupingBy(Course::getCategory, Collectors.mapping(Course::getName, Collectors.toList())))
+
+		);
+
+		System.out.println(
+
+				courses.stream()
+						.collect(Collectors.groupingBy(Course::getCategory,Collectors.maxBy(Comparator.comparing(Course::getNoOfStudents))))
+
+		);
+
+		System.out.println(
+
+				courses.stream()
+						.collect(Collectors.groupingBy(Course::getCategory, Collectors.toMap(Course::getName, Course::getNoOfStudents, Integer::sum)))
+
+		);
 
 	}
 

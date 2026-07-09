@@ -1,4 +1,4 @@
-package programming.lambda02;
+package programming.drsean.lambda02;
 
 import java.util.*;
 import java.util.function.*;

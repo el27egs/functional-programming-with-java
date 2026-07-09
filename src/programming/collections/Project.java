@@ -1,4 +1,4 @@
-package programming.demo;
+package programming.collections;
 
 public class Project {
 

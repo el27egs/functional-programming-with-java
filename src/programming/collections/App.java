@@ -1,4 +1,4 @@
-package programming.demo;
+package programming.collections;
 
 import java.util.*;
 import java.util.stream.Collectors;
